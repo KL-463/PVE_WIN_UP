@@ -113,7 +113,7 @@ if [[ "$OPTION" == "1" ]]; then
     read -p "请输入 VM 的 ID: " VM_ID
 
     echo "正在下载 winvmup.py 文件..."
-    wget -O "$CURRENT_DIR/winvmup.py" https://raw.githubusercontent.com/yourusername/yourrepository/main/winvmup.py
+    wget -O "$CURRENT_DIR/winvmup.py" https://raw.githubusercontent.com/KL-463/pvestartwinvm/main/winvmup.py
     if [[ $? -ne 0 ]]; then
         echo "下载 winvmup.py 文件失败。"
         exit 1
