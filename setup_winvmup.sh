@@ -1,12 +1,9 @@
 #!/bin/bash
 
-# 获取操作系统类型
 OS=$(uname -s)
 
-# 获取 Python 解释器路径
 PYTHON_BIN=$(which python3)
 
-# 检查 Python 版本
 REQUIRED_PYTHON="3.6"
 PYTHON_VERSION=$($PYTHON_BIN -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')
 
@@ -58,7 +55,6 @@ if [[ "$PYTHON_VERSION" < "$REQUIRED_PYTHON" ]]; then
     fi
 fi
 
-# 检查并安装 pip3
 if ! command -v pip3 &> /dev/null; then
     echo "正在安装 pip3 ..."
     case "$OS" in
@@ -90,7 +86,6 @@ if ! command -v pip3 &> /dev/null; then
     fi
 fi
 
-# 检查并安装所需的 Python 库
 REQUIRED_LIBRARIES=("evdev" "logging")
 
 echo "正在检查运行环境..."
@@ -107,7 +102,6 @@ for lib in "${REQUIRED_LIBRARIES[@]}"; do
     fi
 done
 
-# 提供选项
 echo "请选择操作："
 echo "1) 启动 winvmup 服务"
 echo "2) 删除 winvmup 服务"
