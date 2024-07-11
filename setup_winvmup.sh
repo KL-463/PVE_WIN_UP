@@ -112,7 +112,6 @@ CURRENT_DIR=$(pwd)
 if [[ "$OPTION" == "1" ]]; then
     read -p "请输入 VM 的 ID: " VM_ID
 
-    # 下载 winvmup.py 文件
     echo "正在下载 winvmup.py 文件..."
     wget -O "$CURRENT_DIR/winvmup.py" https://raw.githubusercontent.com/yourusername/yourrepository/main/winvmup.py
     if [[ $? -ne 0 ]]; then
@@ -120,14 +119,11 @@ if [[ "$OPTION" == "1" ]]; then
         exit 1
     fi
 
-    # 修改 winvmup.py 中的 VM ID
     echo "正在修改 winvmup.py 文件..."
     sed -i "s/vm_id = 105/vm_id = $VM_ID/" "$CURRENT_DIR/winvmup.py"
 
-    # 赋予执行权限
     chmod +x "$CURRENT_DIR/winvmup.py"
 
-    # 创建 systemd 服务文件
     echo "正在创建 systemd 服务文件..."
     cat <<EOT > /etc/systemd/system/winvmup.service
 [Unit]
@@ -143,7 +139,6 @@ User=root
 WantedBy=multi-user.target
 EOT
 
-    # 重新加载 systemd，启用并启动服务
     sudo systemctl daemon-reload
     sudo systemctl enable winvmup.service
     sudo systemctl start winvmup.service
@@ -151,17 +146,14 @@ EOT
     echo "winvmup 服务已启动。"
 
 elif [[ "$OPTION" == "2" ]]; then
-    # 停止并禁用服务
     echo "正在停止 winvmup 服务..."
     sudo systemctl stop winvmup.service
     sudo systemctl disable winvmup.service
 
-    # 删除服务文件和脚本
     echo "正在删除文件..."
     sudo rm -f /etc/systemd/system/winvmup.service
     rm -f "$CURRENT_DIR/winvmup.py"
 
-    # 重新加载 systemd
     sudo systemctl daemon-reload
 
     echo "winvmup 服务已删除。"
