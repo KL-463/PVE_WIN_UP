@@ -58,6 +58,38 @@ if [[ "$PYTHON_VERSION" < "$REQUIRED_PYTHON" ]]; then
     fi
 fi
 
+# 检查并安装 pip3
+if ! command -v pip3 &> /dev/null; then
+    echo "正在安装 pip3 ..."
+    case "$OS" in
+        Linux)
+            if [ -f /etc/debian_version ]; then
+                sudo apt-get update
+                sudo apt-get install -y python3-pip
+            elif [ -f /etc/redhat-release ]; then
+                sudo yum install -y python3-pip
+            elif [ -f /etc/arch-release ]; then
+                sudo pacman -Syu --noconfirm python-pip
+            else
+                echo "不支持的 Linux 发行版。请手动安装 pip3。"
+                exit 1
+            fi
+            ;;
+        Darwin)
+            brew install python
+            ;;
+        *)
+            echo "不支持的操作系统。请手动安装 pip3。"
+            exit 1
+            ;;
+    esac
+
+    if [[ $? -ne 0 ]]; then
+        echo "pip3 安装失败，请手动安装。"
+        exit 1
+    fi
+fi
+
 # 检查并安装所需的 Python 库
 REQUIRED_LIBRARIES=("evdev" "logging")
 
@@ -88,7 +120,7 @@ if [[ "$OPTION" == "1" ]]; then
 
     # 下载 winvmup.py 文件
     echo "正在下载 winvmup.py 文件..."
-    wget -O "$CURRENT_DIR/winvmup.py" https://raw.githubusercontent.com/KL-463/pvestartwinvm/main/winvmup.py
+    wget -O "$CURRENT_DIR/winvmup.py" https://raw.githubusercontent.com/yourusername/yourrepository/main/winvmup.py
     if [[ $? -ne 0 ]]; then
         echo "下载 winvmup.py 文件失败。"
         exit 1
