@@ -5,6 +5,6 @@
 在windows虚拟机启动后按下win+alt组合键则会由于返回running状态脚本不会尝试再次启动虚拟机
 
 ### 一键运行脚本
-···
-curl -o setup_winvmup.sh https://raw.githubusercontent.com/KL-463/pvestartwinvm/main/setup_winvmup.sh && chmod +x setup_winvmup.sh && ./setup_winvmup.sh
-···
+
+`curl -o setup_winvmup.sh https://raw.githubusercontent.com/KL-463/pvestartwinvm/main/setup_winvmup.sh && chmod +x setup_winvmup.sh && ./setup_winvmup.sh`
+
