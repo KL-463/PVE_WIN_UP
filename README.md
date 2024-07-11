@@ -6,5 +6,6 @@
 
 ### 一键运行脚本
 
-`curl -o setup_winvmup.sh https://raw.githubusercontent.com/KL-463/pvestartwinvm/main/setup_winvmup.sh && chmod +x setup_winvmup.sh && ./setup_winvmup.sh`
-
+```
+curl -o setup_winvmup.sh https://raw.githubusercontent.com/KL-463/pvestartwinvm/main/setup_winvmup.sh && chmod +x setup_winvmup.sh && ./setup_winvmup.sh
+```
